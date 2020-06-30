@@ -1,13 +1,15 @@
 import { put, takeLatest, all } from 'redux-saga/effects';
 import { FETCH_VIDEOS, VIDEOS_RECEIVED } from '../actions'
 
-function* fetchVideos({searchCriteria}) {
-    console.log('URL',searchCriteria)
+function* fetchVideos({ searchCriteria }) {
 
+    console.log('searchCriteria', searchCriteria.text)
     const json = yield fetch(
-        `https://www.googleapis.com/youtube/v3/search?key=AIzaSyAcK7DkZOxwRywdYB-iK9JXa5dE5B7TclI&part=snippet&type=video&q=${searchCriteria}`
+        `https://www.googleapis.com/youtube/v3/search?key=AIzaSyDGbf5vvFN83zH3Fwi8GnWmTWi-zygBGBo&part=snippet&type=video&q=${searchCriteria.text}`
     )
-        .then(response => response.json(),);
+        .then(response => response.json())
+        .catch(err => console.log('Error', err))
+
     yield put({ type: VIDEOS_RECEIVED, json: json.items, });
 }
 
