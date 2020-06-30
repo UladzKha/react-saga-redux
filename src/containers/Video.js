@@ -1,45 +1,56 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import ReactPlayer from 'react-player';
+import { render } from '@testing-library/react';
+import { Container, Col, Row } from 'react-bootstrap';
 
 const videoIdDefault = 'P-WP6POdTgY';
 const titleDefault = 'How to become a Programmer';
 const descriptionDefault = "In this video i will tell you what exactly you need to bacome a software developer";
 const channelNameDefault = "the one from millions";
 
-function Video({ videos }) {
-    if (videos) {
-        console.log('videos', videos)
-        console.log('Channel Title', videos.snippet.channelTitle)
-        console.log('Description', videos.snippet.description)
-        console.log('Title', videos.snippet.title)
-        console.log('VIDEOID', videos.id.videoId)
-    }
 
+function Video({ videos, playing }) {
+    console.log('VIDEOS', playing)
     return (
         <>
-            {videos ?
-                <>
-                    <ReactPlayer key={`https://www.youtube.com/watch?v=${videos.id.videoId}`} url={`https://www.youtube.com/watch?v=${videos.id.videoId}`} />
-                    <h2>{videos.snippet.title || titleDefault}</h2>
-                    <h2>{videos.snippet.description || descriptionDefault}</h2>
-                    <h2>{videos.snippet.channelTitle || channelNameDefault}</h2>
-                </>
-                :
-                <>
-                    <ReactPlayer key={`https://www.youtube.com/watch?v=${videoIdDefault}`} url={`https://www.youtube.com/watch?v=${videoIdDefault}`} />
-                    <h2>{titleDefault}</h2>
-                    <h2>{descriptionDefault}</h2>
-                    <h2>{channelNameDefault}</h2>
-                </>
-            }
+            <Container style={{ marginTop: 3 }}>
+                {videos ?
+                    <>
+                        <ReactPlayer width='100%' height='700px' url={`https://www.youtube.com/watch?v=${videos.id.videoId}`} />
+                        <h5>{videos.snippet.title || titleDefault}</h5>
+                        <h2>{videos.snippet.description || descriptionDefault}</h2>
+                        <h2>{videos.snippet.channelTitle || channelNameDefault}</h2>
+                        <button onClick={() => playing = !playing}>Stop</button>
+                    </>
+                    :
+                    <>
+                        <h2>{titleDefault}</h2>
+                        <ReactPlayer controls={true} width='100%' height='700px' url={`https://www.youtube.com/watch?v=${videoIdDefault}`} />
+                        <Row>
+                            <Col sm={8}>
+                                <h4>Description: {descriptionDefault}</h4>
+                            </Col>
+                            <Col sm={4}>
 
+                                <h4>Channel: {channelNameDefault}</h4>
+                            </Col>
+                        </Row>
+
+
+                        <button onClick={() => playing = !playing}>Stop</button>
+
+                    </>
+                }
+            </Container>
         </>
     )
 }
 
 const mapStateToProps = (state) => ({
     videos: state.videos,
+    playing: state.playing
 })
+
 Video = connect(mapStateToProps, null)(Video)
 export default Video;

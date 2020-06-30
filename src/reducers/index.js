@@ -5,7 +5,7 @@ const reducer = (state = {}, action) => {
         case FETCH_VIDEOS:
             return { ...state, loading: true };
         case VIDEOS_RECEIVED:
-            return { ...state, videos: action.json, loading: false }
+            return { ...state, videos: action.json[0], loading: false, playing: false }
         default:
             return state;
     }

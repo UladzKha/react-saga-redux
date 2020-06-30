@@ -7,9 +7,9 @@ import * as serviceWorker from './serviceWorker';
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import {logger} from 'redux-logger'
+import createSagaMiddleware from 'redux-saga';
 import reducer from './reducers'
 import rootSaga from './sagas'
-import createSagaMiddleware from 'redux-saga';
 
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(

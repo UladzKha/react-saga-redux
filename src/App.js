@@ -1,13 +1,15 @@
 import React from 'react';
-import Button from './containers/Button'
+import Search from './containers/Search'
 import Video from './containers/Video'
 import Loading from './containers/Loading'
+import Header from './components/Header';
 
 function App() {
   return (
     <>
-      <Button />
+      <Header />
       <Video />
+      <Search />
     </>
   );
 }
