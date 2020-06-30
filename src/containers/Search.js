@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { connect, useSelector } from 'react-redux'
+import { connect } from 'react-redux'
 import { fetchVideos } from '../actions'
-import { Container, Button } from 'react-bootstrap';
+import { Container, Button, Form, Row, Col } from 'react-bootstrap';
 
 function Search({ fetchVideos }) {
     const [searchCriteria, setSearchCriteria] = useState({
@@ -18,12 +18,17 @@ function Search({ fetchVideos }) {
     }
     return (
         <>
-            <Container style={{marginTop: 5}}>
-                <form onSubmit={(e) => handleSubmit(e)}>
-                    <input type='text' value={searchCriteria.text} onChange={(e) => handleInputChange(e)} />
-                    {/* <button onClick={() => fetchVideos(searchCriteria)}>Press to see news</button> */}
-                    <Button variant="primary" type='submit'>Search</Button>
-                </form>
+            <Container style={{ marginTop: 10 }}>
+                <Form onSubmit={(e) => handleSubmit(e)}>
+                    <Row>
+                        <Col sm={10}>
+                            <Form.Control type='text' value={searchCriteria.text} onChange={(e) => handleInputChange(e)} />
+                        </Col>
+                        <Col sm={2}>
+                            <Button variant="primary" type='submit'>Search</Button>
+                        </Col>
+                    </Row>
+                </Form>
             </Container>
         </>
     )

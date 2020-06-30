@@ -1,6 +1,8 @@
 import { FETCH_VIDEOS, VIDEOS_RECEIVED } from '../actions'
 
-const reducer = (state = {}, action) => {
+const initialState = {}
+
+const reducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_VIDEOS:
             return { ...state, loading: true };
