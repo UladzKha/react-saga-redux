@@ -18,7 +18,7 @@ function Search({ fetchVideos }) {
     }
     return (
         <>
-            <Container style={{ marginTop: 10 }}>
+            <Container style={{ marginTop: 20 }}>
                 <Form onSubmit={(e) => handleSubmit(e)}>
                     <Row>
                         <Col sm={10}>
